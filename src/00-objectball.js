@@ -1,8 +1,8 @@
 function gameObject() {
-  const nbaTeams = {
+  return {
     home: {
       teamName: "Brooklyn Nets",
-      colors: ['Black', 'White'],
+      colors: ["Black", "White"],
       players: {
         "Alan Anderson": {
           number: 0,
@@ -58,7 +58,7 @@ function gameObject() {
     },
     away: {
       teamName: "Charlotte Hornets",
-      colors: ['Turquoise', 'Purple'],
+      colors: ["Turquoise", "Purple"],
       players: {
         "Jeff Adrien": {
           number: 4,
@@ -113,8 +113,71 @@ function gameObject() {
       },
     },
   };
-  return nbaTeams;
 }
+
+function someFunction() {
+  const object = gameObject();
+  console.log(object);
+  return object["home"];
+}
+
+function findPlayer(playersName) {
+  const object = gameObject();
+  const isInHomeTeam = object.home.players[playersName];
+  if (isInHomeTeam) {
+    return isInHomeTeam;
+  } else {
+    return object.away.players[playersName];
+  }
+}
+
+function numPointsScored(playersName) {
+  const foundPlayer = findPlayer(playersName);
+  return foundPlayer.points;
+}
+// console.log(numPointsScored("Brendan Haywood"));
+
+function shoeSize(playersName) {
+  const shoes = findPlayer(playersName);
+  return shoes.shoe;
+
+  // const object = gameObject();
+
+  // const isInHomeTeam = object.home.players[playersName];
+  // if (isInHomeTeam) {
+  //   return isInHomeTeam.shoe;
+  // } else {
+  //   return object.away.players[playersName].shoe;
+  // }
+}
+console.log(shoeSize("Brendan Haywood"));
+
+shoeSize("Jason Terry");
+
+// Build a function, teamColors, that takes in an argument of the team name and returns an array of that teams colors.
+
+function teamColors(teamName) {
+  const object = gameObject();
+  if (object.home.teamName === teamName) {
+    return object.home.colors;
+  } else {
+    return object.away.colors;
+  }
+}
+console.log(teamColors("Brooklyn Nets"));
+
+// Build a function, teamNames, that operates on the game object to return an array of the team names.
+
+const teamNames = () => {
+  const object = gameObject();
+  const teamNamesArray = [];
+  console.log(object);
+  for (const property in object) {
+    teamNamesArray.push(object[property].teamName);
+    return teamNamesArray;
+  }
+};
+console.log(teamNames());
 // issues on this function
 // function numPointsScored(playerName) {
 //   console.log(gameObject().home.players["Alan Anderson"])
@@ -125,15 +188,15 @@ function gameObject() {
 //   }
 // }
 
-const player1 = "Brendan Haywood"
-console.log(numPointsScored(player1))
+// const player1 = "Brendan Haywood";
+// console.log(numPointsScored(player1));
 
-function teamColors(team) {
-  if (gameObject().home.teamName === team) {
-    return gameObject().home.colors
-  } else {
-    return gameObject().away.colors
-  }
-}
+// function teamColors(team) {
+//   if (gameObject().home.teamName === team) {
+//     return gameObject().home.colors;
+//   } else {
+//     return gameObject().away.colors;
+//   }
+// }
 
-console.log(teamColors("Charlotte Hornets"))
+// console.log(teamColors("Charlotte Hornets"));
