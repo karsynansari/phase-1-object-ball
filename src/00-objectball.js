@@ -124,9 +124,18 @@ function gameObject() {
 //     }
 //   }
 // }
+function findPlayer(playerName) {
+  if (gameObject().home.players[playerName]) {
+    return gameObject().home.players[playerName]
+  } else {
+    return gameObject().away.players[playerName]
+  }
+}
 
-const player1 = "Brendan Haywood"
-console.log(numPointsScored(player1))
+function numPointsScored(playerName) {
+  const playerObj = findPlayer(playerName)
+  return playerObj.points
+}
 
 function teamColors(team) {
   if (gameObject().home.teamName === team) {
@@ -136,4 +145,43 @@ function teamColors(team) {
   }
 }
 
-console.log(teamColors("Charlotte Hornets"))
+function teamNames() {
+  return [gameObject().home.teamName, gameObject().away.teamName]
+}
+
+// console.log(teamNames())
+
+// function playerNumbers(team) {
+//   if (gameObject().home.teamName === team) {
+//     const arrPlayerNumbers = []
+//     for (const player in gameObject().home.players) {
+//       arrPlayerNumbers.push(player.number)
+//     }
+//   }
+// }
+
+// console.log(playerNumbers("Brooklyn Nets"))
+
+function playerStats(playerName) {
+  return findPlayer(playerName)
+}
+
+function bigShoeRebounds() {
+  let biggestShoeSize = 0
+  let playerWithBiggestShoe = {}
+  for (const player in gameObject().home.players) {
+    if (player.shoe > biggestShoeSize) {
+      biggestShoeSize = player.shoe
+      playerWithBiggestShoe = player
+    }
+  }
+  for (const player in gameObject().away.players) {
+    if (player.shoe > biggestShoeSize) {
+      biggestShoeSize = player.shoe
+      playerWithBiggestShoe = player
+    }
+  }
+  return player.rebounds
+}
+
+console.log(bigShoeRebounds())
